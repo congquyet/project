@@ -1,0 +1,50 @@
+﻿@*nhan dien cac file torng thu muc models*@
+@using project.Models
+
+@*khai bao kieu du lieu cua Model*@
+@model X.PagedList.IPagedList<ItemUser>
+
+@*doi tuong de goi ham hien thi phan trang*@
+@using X.PagedList.Mvc.Core
+
+@{
+    //import file Layout.cshtml vao day
+    Layout = "~/Areas/Admin/Views/Shared/Layout.cshtml";
+}
+<div class="card mb-4">
+    <div style="margin-bottom:5px;">
+        <a href="/Admin/Users/Create" class="btn btn-primary">Add User</a>
+    </div>
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        List User
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td style="text-align:center;">
+                        <a href="/Admin/Users/Update/@item.Id">Update</a>&nbsp;
+                        <a href="/Admin/Users/Delete/@item.Id" onclick="return window.confirm('Are you sure?');">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="datatable-pagination">
+            @Html.PagedListPager(Model,page=>Url.Action("Index",new{page=page}))
+        </div>
+
+    </div>
+</div>

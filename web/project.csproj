@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Admin\Data\**" />
+    <Compile Remove="Areas\Admin\Models\**" />
+    <Content Remove="Areas\Admin\Data\**" />
+    <Content Remove="Areas\Admin\Models\**" />
+    <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Areas\Admin\Models\**" />
+    <None Remove="Areas\Admin\Data\**" />
+    <None Remove="Areas\Admin\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Upload\Adv\" />
+    <Folder Include="wwwroot\Upload\Slides\" />
+    <Folder Include="wwwroot\Upload\News\" />
+    <Folder Include="wwwroot\Upload\Products\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\Adv\CreateUpdate.cshtml" />
+    <None Include="Areas\Admin\Views\Adv\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Products\CreateUpdate.cshtml" />
+    <None Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Slides\CreateUpdate.cshtml" />
+    <None Include="Areas\Admin\Views\Slides\Index.cshtml" />
+    <None Include="Views\Account\Login.cshtml" />
+    <None Include="Views\Account\Register.cshtml" />
+    <None Include="wwwroot\Frontend\fonts\fa-brands-400.svg" />
+    <None Include="wwwroot\Frontend\fonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\Frontend\fonts\fa-regular-400.svg" />
+    <None Include="wwwroot\Frontend\fonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\Frontend\fonts\fa-solid-900.svg" />
+    <None Include="wwwroot\Frontend\fonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\Frontend\fonts\icomoon5e8d.svg" />
+    <None Include="wwwroot\Frontend\js\bootstrap.min.js" />
+    <None Include="wwwroot\Frontend\js\jquery-3.4.1.min.js" />
+    <None Include="wwwroot\Frontend\js\jqueryCustome.js" />
+    <None Include="wwwroot\Frontend\js\popper.min.js" />
+  </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Copy Condition="'$(Configuration)'=='Debug'" SourceFiles=".\wwwroot\app_offline.htm" DestinationFolder=".\"></Copy>
+  </Target>
+  <Target Name="PostBuild" BeforeTargets="PostBuildEvent">
+    <Delete Condition="'$(Configuration)'=='Debug'" Files="app_offline.htm"></Delete>
+  </Target>
+
+</Project>
